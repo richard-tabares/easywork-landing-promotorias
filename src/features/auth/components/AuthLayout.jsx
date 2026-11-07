@@ -1,0 +1,63 @@
+import { Check } from 'lucide-react'
+import authBackdrop from '../../../assets/backdrops/auth-insurance-agent.webp'
+import BrandLogo from '../../../components/ui/BrandLogo'
+import PhotoBackdrop from '../../../components/ui/PhotoBackdrop'
+import { cn } from '../../../lib/cn'
+
+export default function AuthLayout({
+  logoClassName,
+  headline,
+  bullets,
+  maxWidthClassName = 'max-w-100',
+  children,
+}) {
+  return (
+    <div className="flex min-h-screen flex-wrap bg-white font-sans text-ink">
+      <div className="relative min-h-105 min-w-0 grow basis-full overflow-hidden lg:basis-1/2">
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-15 -top-15 left-0 right-4 rounded-ew-auth bg-white"
+        />
+        <PhotoBackdrop
+          src={authBackdrop}
+          priority
+          imageClassName="object-top"
+          className="absolute -bottom-15 -top-15 left-0 right-7.5 rounded-ew-auth"
+          overlayClassName="bg-linear-to-r from-brand/92 via-brand/85 to-brand/65"
+        />
+
+        <div className="relative flex h-full flex-col justify-between gap-10 px-14 pb-12 pt-14 lg:pr-35">
+          <span className="text-xs font-semibold tracking-widest text-lilac-300">ALL IN ONE</span>
+
+          <div className="flex max-w-130 flex-col gap-7">
+            <h1 className="font-heading text-3xl font-extrabold leading-tight text-white md:text-4xl xl:text-ew-auth">
+              {headline}
+            </h1>
+            <ul className="flex list-none flex-col gap-3.5 p-0 text-base text-lilac-100">
+              {bullets.map((bullet) => (
+                <li key={bullet} className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-ink"
+                  >
+                    <Check size={14} strokeWidth={3} className="text-white" />
+                  </span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <span className="text-sm text-footer-muted">© 2026 Easywork</span>
+        </div>
+      </div>
+
+      <main className="flex min-w-0 grow basis-full items-center justify-center px-6 py-12 lg:basis-1/2">
+        <div className={cn('flex w-full flex-col gap-7', maxWidthClassName)}>
+          <BrandLogo imageClassName={logoClassName} className="self-start" />
+          {children}
+        </div>
+      </main>
+    </div>
+  )
+}
